@@ -28,7 +28,7 @@ export default function AutoCompleteInputWrap ({
        hoverColor,
        labelPosition,
        textFieldProps,
-       Icon,
+
        ..._rest
        
          }:AutoCompleteInputWrapPropsType){
@@ -67,10 +67,7 @@ export default function AutoCompleteInputWrap ({
              helperText={helpText && <ControlledHelperText text={helpText} helpTextPotionsEnd={helpTextPotionsEnd??false} />}
             variant={variant ?? 'standard'}
             label={<ControlledLabel labelPosition={labelPosition} label={label} />}
-            InputProps={{
-              startAdornment: Icon && Icon
-            }}
-  
+        
             
              {...textFieldProps}
            />

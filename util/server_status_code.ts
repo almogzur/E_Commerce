@@ -1,4 +1,4 @@
- const HttpstatusCodes = {
+ const HttpStatusCodes = {
   "Continue": 100,
   "SwitchingProtocols": 101,
   "Processing": 102,
@@ -67,4 +67,4 @@
   "NetworkAuthenticationRequired": 511
 }
 
-export default HttpstatusCodes
+export default HttpStatusCodes

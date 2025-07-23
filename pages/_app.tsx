@@ -1,15 +1,14 @@
-import { WindowSizeProvider } from '@/context/window_size';
 import '@/styles/globals.css'
+import { WindowSizeProvider } from '@/context/window_size';
+import { ProductProvider } from '@/context/product_context';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { CartProvider } from '@/context/cart_context';
 import type { AppProps } from "next/app";
 
-
-
 const theme = createTheme({
-  direction: "rtl",
   palette: {
     primary: { main: "#d67541" },
-    secondary:{main:"#1f252e"},
+    secondary: { main: "#1f252e" },
     warning: { main: "#fdb931" }
   },
   typography: {
@@ -17,88 +16,40 @@ const theme = createTheme({
       'Rubik Dirt'
     ].join(",")
   },
-
-
   components: {
-
     MuiTypography: {
       defaultProps: {},
       styleOverrides: {
-        root: {
-          color: "black",
-
-
-
-        }
+        root: {color: "black",}
       }
-
     },
     MuiInputBase: {
-      defaultProps: {
-
-      },
-      styleOverrides: {
-        root: {
-
-        }
-      }
+      defaultProps: {},
+      styleOverrides: {root: {}}
     },
     // when in form-control
     MuiInputLabel: {
       defaultProps: {},
-      styleOverrides: {
-        root: {
-
-
-
-
-
-
-
-        },
-      }
+      styleOverrides: {root: {}}
     },
     MuiFormControl: {
       defaultProps: {},
-      styleOverrides: {
-        root: {
-
-
-        }
-      }
+      styleOverrides: {root: {}}
     },
     MuiOutlinedInput: {
       defaultProps: { notched: false },
-      styleOverrides: {
-        root: {
-
-
-
-        },
-      }
+      styleOverrides: {root: {} }
     },
     MuiStack: {
-      styleOverrides: {
-        root: {
-          direction: "rtl"
-        }
-      }
+      styleOverrides: { root: {}}
     },
     MuiSelect: {
       defaultProps: {},
-      styleOverrides: {
-        root: {
-        }
-      }
+      styleOverrides: {root: {}}
     },
     MuiMenuItem: {
       defaultProps: {},
-      styleOverrides: {
-        root: {
-          direction: "rtl",
-        }
-      },
-
+      styleOverrides: {root: {}},
     },
     MuiButton: {
       defaultProps: { variant: 'text' },
@@ -107,15 +58,8 @@ const theme = createTheme({
           fontSize: "1em",
           fontWeight: 700,
         },
-
-      }
-    },
-
-
-
-
+      }},
   },
-
 },
 )
 
@@ -123,7 +67,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <WindowSizeProvider>
-      <Component {...pageProps} />;
+        <CartProvider>
+        <ProductProvider>
+          <Component {...pageProps} />
+        </ProductProvider>
+        </CartProvider>
       </WindowSizeProvider>
     </ThemeProvider>
   )

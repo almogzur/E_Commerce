@@ -1,30 +1,21 @@
 import { useWindowSize } from "@/context/window_size";
+import {  Stack } from "@mui/material";
 import Image from "next/image";
 
 const MainSection = () => {
-
-    const { isMobile, isTablet } = useWindowSize()
+  
+  const { isMobile  } = useWindowSize()
 
   return (
-    <div
-      style={{
-        width: "100%",      // Takes full width of the parent container
-        maxWidth: "1920px", // Optional: sets a max width
-        margin: "20px auto",   // Optional: center the image container
-        height:  isMobile? "300px":  "500px",    // Fixed height, does not shrink/grow
-        position: "relative", // Required when using layout="fill"
-        overflow: "hidden",
-           aspectRatio: "16 / 9",
-           
-      }}
-    >
+    <Stack direction={'row'} justifyContent={'center'} >
       <Image
-        src="/main_section.png"
+        src="/main_section_cover.png"
         alt="main_section"
-        fill  // Makes the image cover the container
-
+        height={ isMobile ? 400: 500}
+        width={1450}
       />
-    </div>
+      </Stack>
+
   );
 };
 

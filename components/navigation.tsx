@@ -2,78 +2,87 @@ import Logo from '@/public/logo.png'
 import Image from 'next/image'
 
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 
 
-import { Button, Stack, useTheme } from "@mui/material";
+import { Stack,  } from "@mui/material";
 import AutoCompleteInputWrap from '@/components/form_inputs/auto-complete-input-wrap';
 import { useWindowSize } from '@/context/window_size';
+import Cart from './cart';
+import Link from 'next/link';
 
-const NavigationBar = () => {
 
-    const { isMobile, isTablet } = useWindowSize()
-    const theme = useTheme()
+export type NavigationBarPropsType = {
+    applyMargin?: boolean
+}
+
+const NavigationBar = ({applyMargin}: NavigationBarPropsType) => {
+
+    const { isMobile, isTablet  } = useWindowSize()
 
     const isSmallScreen = isMobile || isTablet
 
     return (
         <Stack
+            bgcolor='#ede7df'
+            boxShadow={'0px 4px 4px rgba(0, 0, 0, 0.25)'}
              direction={'row'} 
              width={'100%'}
               alignItems={'center'}
-               justifyContent={'space-around'}
+   
                height={isSmallScreen ? 70: 100}
+               style={{direction:'rtl'}}
+               mb={applyMargin ? 0:  2}
+            
                 >
-           <Button
-              sx={{color:'black'}}
-               style={{ marginLeft: "20px", marginRight: "20px" }} 
-               >
+
             <FaRegUser
-                 size={ isSmallScreen ? 25:  40}
+                 size={ isSmallScreen ? 25:  30}
+                 style={{ marginRight: "10px", marginLeft: "10px" }}
                 />
-         </Button>
+
 
             <AutoCompleteInputWrap AutocompleteOptionArray={[]}
                 label={''}
                 value={undefined}
                 onChangeHandler={() => { }}
-                Icon={<FaSearch size={ isSmallScreen ? 25:  30}/> }
+                 m={0}
+                    
                 helpText={undefined}
                 labelPosition={'top'}
                 variant='outlined'
-                bg='#ede7df'
-                sx={{
-                    height: isSmallScreen ? 50: 100
-                }}
                 textFieldProps={{
                     sx: {
                         borderRadius: 15,
                         bgcolor: '#ede7df',
                         minWidth: isMobile ? 100 : isTablet ? 200 : 300,
-                        
-                    }
+                              
+                    },
+                    slotProps:{
+                        input:{
+                            style:{
+                                borderRadius:15,
+                                backgroundColor:'#ede7df'
+                            },
+                              startAdornment:  <FaSearch size={ isSmallScreen ? 25:  30}/>
+                    }}
                 }}
             />
 
-           <Button 
-             sx={{color:'black'}} 
-            style={{ marginRight: "20px" }}
-            >
+            <Cart/>
 
-            <MdOutlineShoppingCart
-                   size={isSmallScreen ? 30:  40}
-                    
-              />
-              </Button>
-
+        <Link
+         href={'/'}
+         style={{ marginRight: "auto" }}
+         >
             <Image
                 src={Logo}
                 alt="logo"
                 height={isSmallScreen ? 70: 100}
                 width={isSmallScreen ? 70: 100}
-                style={{ marginRight: "auto" }}
+  
             />
+            </Link>
         </Stack>
     )
 
